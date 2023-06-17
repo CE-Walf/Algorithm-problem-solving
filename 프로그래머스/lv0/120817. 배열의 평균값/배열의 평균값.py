@@ -1,9 +1,10 @@
 def solution(numbers):
     
-    sum = 0
-    for i in numbers:
-        sum += i
-        
-    answer = sum / len(numbers)
+    answer = 0
     
+    for i in numbers:
+        answer += i
+    
+    answer = answer / len(numbers)
+                          
     return answer
