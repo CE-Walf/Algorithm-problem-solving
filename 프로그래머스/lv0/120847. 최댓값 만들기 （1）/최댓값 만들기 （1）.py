@@ -1,6 +1,5 @@
 def solution(numbers):
-    
-    numbers.sort(reverse=True)
-    answer = numbers[0] * numbers[1]
+    numbers.sort()    
+    answer = numbers[-1] * numbers[-2]
     
     return answer
