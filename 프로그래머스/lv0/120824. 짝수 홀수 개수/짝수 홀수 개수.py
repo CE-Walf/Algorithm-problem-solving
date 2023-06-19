@@ -1,15 +1,16 @@
 def solution(num_list):
     answer = []
-    odd = 0
-    even = 0 
+    
+    oddNum = 0
+    evenNum = 0
     
     for i in num_list:
         if i % 2 == 0:
-            even += 1
-        else:
-            odd += 1
+            evenNum += 1
+        elif i % 2 == 1:
+            oddNum += 1
     
-    answer.append(even)
-    answer.append(odd)
+    answer.append(evenNum)
+    answer.append(oddNum)
     
     return answer
