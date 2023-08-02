@@ -1,0 +1,18 @@
+def solution(A,B):
+    answer = 0
+    
+    A.sort()
+    B.sort(reverse=True)
+    
+    for i in range(len(A)):
+        answer += A[i]*B[i]
+    
+    
+    # calc_list = list()
+    # for i in range(len(A)):
+    #     c
+    #     for j in range(len(B)):
+    #         calc_list.append()
+    # answer = min(calc_list)
+
+    return answer
