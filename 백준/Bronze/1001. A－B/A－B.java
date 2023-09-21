@@ -8,7 +8,5 @@ public class Main{
         int B = scanner.nextInt();
         
         System.out.println(A-B);
-        
-    
     }
 }
