@@ -2,31 +2,35 @@ import java.util.Scanner;
 
 public class Main{
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
-        int Array[] = new int[N+1];
-        int temp;
-        
-        for(int index = 1; index <= N; index++)
-            Array[index] = index;
-        
-        for(int index = 0; index < M; index++){
-            int i = scanner.nextInt();
-            int j = scanner.nextInt();
-            
-            while(i<j){
-                temp = Array[i];
-                Array[i] = Array[j];
-                Array[j] = temp;
-                i++;
-                j--;
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+
+        int[] basket = new int[N+1];
+        for(int i = 1; i <= N; i++)
+            basket[i] = i;
+
+
+        for(int i = 0; i < M; i++){
+            int start = sc.nextInt();
+            int end = sc.nextInt();
+            int temp = 0;
+
+            while(true){
+                if(start >= end)break;
+
+                temp = basket[end];
+                basket[end] = basket[start];
+                basket[start] = temp;
+
+                start++;
+                end--;
             }
         }
-        
-        for(int index = 1; index <= N; index++)
-            System.out.print(Array[index] + " ");
+
+        for(int i = 1; i <= N; i++){
+            System.out.print(basket[i] + " ");
+        }
 
     }
 }
