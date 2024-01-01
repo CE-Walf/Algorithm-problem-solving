@@ -1,22 +1,17 @@
 import java.util.Scanner;
 
-public class Main {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String strN = sc.next();
 
-		int n = scanner.nextInt();
-		
-		String  number = scanner.next();
-		
-		char carray[] = new char [n];
-		
-		int sum=0;
-		
-		for (int i = 0; i < n; i++) {
-			carray[i] = number.charAt(i);
-			sum += ((int)carray[i]-48);
-		}
+        int sum = 0;
 
-		System.out.println(sum);
-	}
+        for(int i = 0; i < N; i++){
+            sum += strN.charAt(i) - '0';
+        }
+
+        System.out.println(sum);
+    }
 }
