@@ -22,12 +22,16 @@ public class Main {
         // 일곱 난쟁이가 아닌 두 명의 난쟁이의 찾기
         int falseDwarf1 = 0;
         int falseDwarf2 = 0;
-        boolean flag = false;
+        boolean breakFlag = false;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (sumOfHeight - heightOfDwarf[i] - heightOfDwarf[j] == 100) {
                     falseDwarf1 = heightOfDwarf[i];
                     falseDwarf2 = heightOfDwarf[j];
+                    breakFlag = true;
+                }
+                if (breakFlag){
+                    break;
                 }
             }
         }
