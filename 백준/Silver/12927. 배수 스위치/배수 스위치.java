@@ -20,8 +20,9 @@ public class Main{
                 bulbStatus[i+1] = true;
             } // 굳이 N일때는 설정을 하지 않아도 됨. (기본 값 false)
         }
-        
-        // 중요
+
+        // bulbStatus를 순회하면서,
+        // i번째의 전구가 Y일때, 그의 배수들은 다 뒤바꿔주고, 그 과정을 끝까지 진행한다.
         for (int i = 1; i <= bulbCount; i++){
             if (bulbStatus[i]){
                 for (int j = i; j <= bulbCount; j += i){
