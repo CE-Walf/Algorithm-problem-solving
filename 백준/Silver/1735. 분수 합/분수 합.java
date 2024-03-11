@@ -1,31 +1,34 @@
 import java.util.Scanner;
 
-public class Main {
-    
-    public static int getGcd(int a, int b){
-        if(a % b == 0)
-            return b;
-        else
-            return getGcd(b, a % b);
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int firstA = scanner.nextInt();
+        int firstB = scanner.nextInt();
+
+        int secondA = scanner.nextInt();
+        int secondB = scanner.nextInt();
+
+        // 분모를 firstB * secondB로 통일 시켜주고, 그 둘을 더해주자.
+        int answerA = firstA * secondB + firstB * secondA;
+        int answerB = firstB * secondB;
+
+        // 이제 answerA와, answerB의 최대공약수를 찾아서, 나누어 주자.
+        int gcd = getGCD(answerA, answerB);
+
+        answerA = answerA / gcd;
+        answerB = answerB / gcd;
+
+        System.out.println(answerA + " " + answerB);
+
     }
-    
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		
-		int A[] = new int[2];
-		int B[] = new int[2];
-		
-		for(int i = 0; i < 2; i++){
-		    A[i] = scanner.nextInt();
-		    B[i] = scanner.nextInt();
-		}
-		
-		int A2 = A[0]*B[1]+A[1]*B[0];
-		int B2 = B[0]*B[1];
-		
-		int gcd = getGcd(A2,B2);
-		
-		System.out.println(A2/gcd + " " + B2/gcd);
-		
-	}
+
+    static int getGCD(int a, int b){
+        if (a % b == 0){
+            return b;
+        } else {
+            return getGCD(b, a % b);
+        }
+    }
 }
