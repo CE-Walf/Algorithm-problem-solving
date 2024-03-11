@@ -24,6 +24,7 @@ public class Main{
 
     }
 
+    // 유클리드 호제법 사용하여 gcd 구하기
     static int getGCD(int a, int b){
         if (a % b == 0){
             return b;
