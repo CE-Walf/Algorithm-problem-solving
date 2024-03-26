@@ -1,49 +1,47 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public class Main{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // 일곱 난쟁이의 키의 합이 100이다.
-        // 모든 난쟁이의 키를 다 더하고, 무작위로 2명의 난쟁이의 키를 빼는데,
-        // 그 값이 100이 됬을때를 찾는 방법으로 문제를 풀어보자.
+        // 아홉 난쟁이가 있는데, 이중 둘은 가짜이며, 일곱 난쟁이의 키의 합은 100이다.
+        // 그 일곱난쟁이의 키를 오름차순으로 출력하여 주면 된다.
 
-        int n = 9;  // 아홉명의 난쟁이
-        int sumOfHeight = 0;    //  9명의 난쟁이의 키의 합을 담는 변수
-        int[] heightOfDwarf = new int[n];   // 난쟁이들의 키를 담는 변수
-        // 난쟁이들 키 입력하면서, 키의 합 구하기
-        for (int i = 0; i < n; i++) {
-            heightOfDwarf[i] = scanner.nextInt();
-            sumOfHeight += heightOfDwarf[i];
+        // 아홉 난쟁이들의 키를 담을 배열을 선언헌다.
+        int[] dwarfHeight = new int[9];
+        // 아홉 난쟁이의 키를 더한 값을 담는 변수
+        int sum = 0 ;
+
+        // 아홉개의 줄에 걸쳐 난쟁이들의 키가 주어진다.
+        for (int i = 0; i < 9; i++){
+            dwarfHeight[i] = Integer.parseInt(br.readLine());
+            sum += dwarfHeight[i];
         }
 
+        // 아홉 난쟁이 배열을 정렬시켜준다.
+        Arrays.sort(dwarfHeight);
 
-        // 일곱 난쟁이가 아닌 두 명의 난쟁이의 찾기
-        int falseDwarf1 = 0;
-        int falseDwarf2 = 0;
-        boolean breakFlag = false;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (sumOfHeight - heightOfDwarf[i] - heightOfDwarf[j] == 100) {
-                    falseDwarf1 = heightOfDwarf[i];
-                    falseDwarf2 = heightOfDwarf[j];
-                    breakFlag = true;
-                }
-                if (breakFlag){
-                    break;
+        // 여기서 중요한 것은, 아홉 난쟁이의 키의 합 - 가짜 두명 난쟁이의 키 = 100이라는 것이다.
+        int notDwarf1 = 0;
+        int notDwarf2 = 0;
+        for (int i = 0; i < 8; i++){
+            for (int j = i+1; j < 9; j++){
+                if (sum - (dwarfHeight[i] + dwarfHeight[j]) == 100){
+                    notDwarf1 = dwarfHeight[i];
+                    notDwarf2 = dwarfHeight[j];
                 }
             }
         }
 
-        // 난쟁이 키 담은 배열 정렬
-        Arrays.sort(heightOfDwarf);
-
-        // 두명의 난쟁의 키를 제외하고 출력
-        for (int i = 0; i < n; i++) {
-            if (heightOfDwarf[i] != falseDwarf1 && heightOfDwarf[i] != falseDwarf2) {
-                System.out.println(heightOfDwarf[i]);
+        // 출력
+        for (int i : dwarfHeight) {
+            if(i != notDwarf1 && i != notDwarf2){
+                System.out.println(i);
             }
         }
+
     }
 }
