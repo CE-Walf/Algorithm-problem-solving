@@ -4,32 +4,6 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-
-    // 미리 하얀색, 검정색으로 시작하는 8x8을 만들고 비교하자.
-    // 8 x 8 하얀색으로 시작하는 체스판
-    static char[][] whiteChessBoard = {
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'}
-    };
-
-    // 8 x 8 검정색으로 시작하는 체스판
-    static char[][] blackChessBoard = {
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-        {'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'},
-        {'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'},
-    };
-
     // 입력받은 체스판 (정적으로 선언)
     static char[][] chessBoard;
 
