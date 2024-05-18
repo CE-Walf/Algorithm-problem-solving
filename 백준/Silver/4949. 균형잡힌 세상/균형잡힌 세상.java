@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Main{
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -42,7 +41,8 @@ public class Main{
                     }
                 }
 
-                if (temp == ']'){ // 닫는 대괄호라면, 확인해주고 스택에서 제거해준다.
+                // 닫는 대괄호라면, 확인해주고 스택에서 제거해준다.
+                if (temp == ']'){
                     // 스택의 마지막 요소 반환하고 그것이 대괄호인지 확인한다.
                     // 스택이 비어있을 상태에서 peek() 메서드 호출 시
                     // NoSuchElementException 예외가 발생하므로, 비어있지 않을때 조건을 추가한다.
