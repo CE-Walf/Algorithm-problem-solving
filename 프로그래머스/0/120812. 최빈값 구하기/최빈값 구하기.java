@@ -1,34 +1,34 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] array) {
-        // 최빈값을 반환하는 함수
-        // 최빈값이 여러개면 -1을 return 
-        int answer = 0;
+        // Map을 이용하여 최빈값을 구해보자.
+        // Key : array의 원소
+        // Value : 등장 횟수
+        Map<Integer, Integer> modeMap = new HashMap<>();
+
+        int maxCount = 0; // 최대 등장 횟수
+        int answer = 0; // 정답을 담을 변수
         
-        // 0 <= array의 원소 < 1000
-        // 이 제한사항을 이용하여, 배열을 생성해보자.
-        // 정수 배열의 기본값은 0이며, 0번부터 999번까지 0으로 차있다.
-        int[] modeArr = new int[1000];
-        
-        // array를 순회하면서, 최빈값을 세자.
-        int max = 0;
-        for (int element : array){
-            modeArr[element]++;
-            max = Math.max(max, modeArr[element]); 
-        }
-        
-        // 최고로 많이 나온 값을 비교한다. 
-        int count = 0;
-        for (int i = 0; i < 1000; i++){
-            if (modeArr[i] == max){
-                answer = i;
-                count++;
-            }
-            if(count == 2){
+        // 향상된 for문으로 array를 순회해준다.
+        for(int element : array) {
+            // 기본값은 0으로, 등장횟수를 1 추가해준다.
+            int count = modeMap.getOrDefault(element, 0) + 1;
+            
+            if (count > maxCount){
+                // 만약 count가 maxCount보다 클 경우,
+                // maxCount의 값을 count로 바꾸어주고, answer를 해당 원소 값으로 설정한다.
+                maxCount = count;
+                answer = element;
+            } else if (maxCount == count){ 
+                // 만약 count와 maxCount가 같을 경우, 
+                // 최빈값이 여러개이므로, answer를 -1로 설정한다.
                 answer = -1;
-                break;
             }
+            
+            // Map에 값을 넣어준다.
+            modeMap.put(element, count); 
         }
-        
         
         return answer;
     }
