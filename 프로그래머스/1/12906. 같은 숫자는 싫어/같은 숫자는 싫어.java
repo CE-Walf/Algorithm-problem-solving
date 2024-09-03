@@ -2,23 +2,24 @@ import java.util.*;
 
 public class Solution {
     public int[] solution(int []arr) {
-        List<Integer> notSameNum = new ArrayList<>();
+        // 스택 선언
+        Stack<Integer> stack = new Stack<>();
         
-        notSameNum.add(arr[0]);
-        if (arr.length > 1) {
-            for (int i = 1; i < arr.length; i++) {
-                if (arr[i] != arr[i-1]) {
-                    notSameNum.add(arr[i]);
-                }
+        // 배열을 순회한다.
+        // 스택이 비어있거나, 맨 위의 값이랑 element의 값이 같지 않을 때 push한다.
+        for (int element : arr){
+            if (stack.isEmpty() || stack.peek() != element){
+                stack.push(element);
             }
         }
         
-        int answerSize = notSameNum.size();
-        int[] answer = new int[answerSize];
-        for (int i = 0; i < answerSize; i++){
-            answer[i] = notSameNum.get(i);
+        // Stack을 배열로 바꿔준다.
+        int[] answer = new int[stack.size()];
+        // Stack은 LIFO 구조로, 정답 배열의 맨 뒤부터 채운다.
+        for (int i = answer.length - 1; i >= 0; i--) {
+            answer[i] = stack.pop();
         }
-    
+        
         return answer;
     }
 }
