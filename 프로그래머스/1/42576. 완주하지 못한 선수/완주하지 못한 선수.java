@@ -1,22 +1,38 @@
-import java.util.Arrays;
+// 두 번째 풀이
+// HashMap을 사용해보자.
+import java.util.*;
 
 class Solution {
-    public String solution(String[] participant, String[] completion) {
-        // 참여자와 완주자 배열을 알파벳 순으로 정렬
-        Arrays.sort(participant);
-        Arrays.sort(completion);
+    public String solution(String[] participants, String[] completions) {
+        // 완주하지 못한 선수를 담을 변수
+        String answer = "";
         
-        // 두 배열을 비교하여 다른 이름이 나올 때까지 탐색
-        // 완주자 배열의 길이만큼 반복하며, 각 인덱스의 요소 비교
-        // 참여자와 완주자의 이름이 다르면 그 참여자가 완주하지 못한 사람
-        for (int i = 0; i < completion.length; i++){
-            if (!participant[i].equals(completion[i])){
-                return participant[i];
-            }
+        // HashMap 선언
+        // Key : 각 참가자들의 이름
+        // Value : 그 이름의 출현 횟수 (동명이인 때문에)
+        Map<String, Integer> map = new HashMap<>();
+        
+        // 모든 참가자 이름을 HashMap에 저장한다.
+        // 만약 이미 존재하는 이름이라면 출현 횟수를 1 증가시킨다.
+        for (String participant : participants){
+            map.put(participant, map.getOrDefault(participant, 0) + 1);
         }
         
-        // 반복문을 모두 돌았는데도 차이가 없다면,
-        // 참여자 배열의 마지막 요소가 완주하지 못한 사람이다.
-        return participant[participant.length -1];
+        // 모든 완주자 이름에 대해 HashMap에서 출현 횟수를 1 감소시킨다.
+        for (String completion: completions) {
+            map.put(completion, map.get(completion) - 1);
+        }
+        
+        // 참가자 중 출현 횟수가 0이 된 이름을 제거해준다.
+        for (String participant : participants){
+            map.remove(participant, 0);
+        }
+        
+        // HashMap에 남아 있는 유일한 이름이 완주하지 못한 사람이다.
+        for (String name : map.keySet()){
+            answer = name;
+        }
+        
+        return answer;
     }
 }
