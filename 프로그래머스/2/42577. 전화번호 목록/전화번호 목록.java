@@ -1,21 +1,27 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
     public boolean solution(String[] phone_book) {
-        // 전화번호 배열을 사전순으로 정렬하여
-        // 접두사가 되는 번호들이 인접하게 만든다.
-        // 같은 시작 문자열을 가진 경우, 글자 수가 적은 문자열이 더 앞에 온다.
-        Arrays.sort(phone_book);
+        // 전화번호들을 저장할 HashMap 선언
+        Map<String, Integer> map = new HashMap<>();
         
-        // 인접한 두 전화번호를 비교하여, 접두사 관계가 있는지 확인한다.
-        for (int i = 0; i < phone_book.length - 1 ; i++) {
-            // phone_book[i]가 phone_book[i + 1]의 접두사면 false 반환
-            if (phone_book[i + 1].startsWith(phone_book[i])){
-                return false;
-            }
+        // 각 전화번호를 HashMap에 저장 
+        // Value는 의미가 없으므로 0으로 설정해준다.
+        for (String phone : phone_book) {
+            map.put(phone, 0);
         }
         
-        // 모든 번호를 확인했는데, 접두사 관계가 없다면 true 반환
+        // 다시 전화번호 배열을 순회하며 각 번호의 접두사가 HashMap에 존재하는지 확인한다.
+        for (String phone : phone_book){
+            // 접두사를 만들기 위해 0부터 현재 전화번호의 길이까지 부분 문자열을 추출
+            for (int i = 0; i < phone.length(); i++){
+                // 현재 번호의 접두사가 존재하면 false 반환
+                if (map.containsKey(phone.substring(0, i))){
+                    return false;
+                }
+            }
+        }
+        // 모든 번호에 대해 접두사인 경우가 없으면 true 반환
         return true;
     }
 }
