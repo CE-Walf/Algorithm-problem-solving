@@ -4,7 +4,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,7 +18,6 @@ public class Main {
     static int[] di = {0, 0, 1, -1};
     static int[] dj = {1, -1, 0, 0};
     static int count = 0; // 총 단지의 수
-    static int homeCount = 0; // 단지 내의 집의 수
     static List<Integer> homeCounts = new ArrayList<>(); // 각 단지내 집의 수를 오름차순 정렬하기 위한 변수
 
     public static void main(String[] args) throws IOException {
@@ -39,10 +40,9 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (map[i][j] == 1 && !visited[i][j]) {
-                    dfs(i, j);
-                    count++;
+                    int homeCount = bfs(i, j);
                     homeCounts.add(homeCount);
-                    homeCount = 0;
+                    count++;
                 }
             }
         }
@@ -58,20 +58,31 @@ public class Main {
         }
     }
 
-    public static void dfs(int i, int j) {
+    public static int bfs(int i, int j){
+        Queue<int[]> q = new LinkedList<>();
+        int homeCount = 0; // 단지 내 집의 수
+        q.offer(new int[]{i, j});
         visited[i][j] = true;
-        homeCount++;
 
-        for (int index = 0; index < 4; index++) {
-            int moveI = i + di[index];
-            int moveJ = j + dj[index];
-            if (moveI < 0 || moveI >= N || moveJ < 0 || moveJ >= N){
-                continue;
-            }
-            if (map[moveI][moveJ] == 1 && !visited[moveI][moveJ]) {
-                dfs(moveI, moveJ);
+        while(!q.isEmpty()){
+            int[] temp = q.poll();
+            homeCount++;
+
+            for (int index = 0; index < 4; index++){
+                int moveI = temp[0] + di[index];
+                int moveJ = temp[1] + dj[index];
+
+                if (moveI < 0 || moveI >= N || moveJ < 0 || moveJ >= N){
+                    continue;
+                }
+                if (map[moveI][moveJ] == 1 && !visited[moveI][moveJ]){
+                    q.offer(new int[]{moveI, moveJ});
+                    visited[moveI][moveJ] = true;
+                }
+
             }
         }
 
+        return homeCount;
     }
 }
