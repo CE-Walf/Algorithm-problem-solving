@@ -1,25 +1,36 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
-public class Main{
-    public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        
-        int n = scanner.nextInt();
-        int nArray[] = new int[n];
-        int sum = 0;
-        
-        for(int i = 0; i < n; i++){
-            nArray[i] = scanner.nextInt();
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        // 1 <= N <= 10^6
+        int N = Integer.parseInt(br.readLine());
+
+        int[] P = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            P[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(nArray);
-        
-        int j = n;
-        for(int i = 0; i < n; i++){
-                sum += nArray[i] * j;
-                j--;
+
+        // 줄은 빨리 하는사람부터 서는게 낫다.
+        Arrays.sort(P);
+
+        for (int i = 1; i < N; i++){
+            P[i] = P[i] + P[i-1];
         }
-        
-        System.out.println(sum);
+
+        int answer = 0;
+        for (int i = 0; i < N; i++){
+            answer += P[i];
+        }
+
+        System.out.println(answer);
+
     }
 }
