@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+// 다시 풀기 (우선순위 큐 원리 생각하며)
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
