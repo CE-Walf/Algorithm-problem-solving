@@ -1,57 +1,55 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int[][] conenctions;
-    static boolean[] visited;
-    static int computers, networks;
-    static int count = 0;
-    static Queue<Integer> q = new LinkedList<>();
+    static int N; // 컴퓨터의 수
+    static int count = 0; // 바이러스에 감염된 컴퓨터의 수를 저장할 변수
+    static int[][] connections; // 네트워크 연결 상태를 저장할 2차원 배열
+    static boolean[] visited; // 방문 여부를 체크할 배열
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        computers = Integer.parseInt(br.readLine());
-        networks = Integer.parseInt(br.readLine());
+        // 1 ≤ N ≤ 100
+        N = Integer.parseInt(br.readLine());
+        int K = Integer.parseInt(br.readLine()); // 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수
 
-        conenctions = new int[computers+1][computers+1];
-        visited = new boolean[computers+1];
+        connections = new int[N + 1][N + 1];
+        visited = new boolean[N + 1];
 
-        for (int i = 0; i < networks; i++) {
+        // K개의 연결 정보를 입력받아 connections 배열에 저장
+        for (int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine());
 
-            int c1 = Integer.parseInt(st.nextToken());
-            int c2 = Integer.parseInt(st.nextToken());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
 
-            conenctions[c1][c2] = 1;
-            conenctions[c2][c1] = 1;
+            // 양방향 연결 설정
+            connections[start][end] = connections[end][start] = 1;
         }
 
-        // 1번 컴퓨터가 웜 바이러스에 걸렸을 때,
-        // 1번 컴퓨터를 통해 웜 바이러스에 걸리게되는 컴퓨터의 수룰 구하기 위해 DFS
-        // BFS로 진행하자.
-        bfs(1);
-        count--; // 1번 컴퓨터 본인을 지난건 빼준다.
+        // 1번 컴퓨터에서 시작하여 DFS 탐색 수행
+        dfs(1);
+
+        // 감염된 컴퓨터 수 출력 (중요 : 1번 컴퓨터를 제외)
         System.out.println(count);
     }
 
-    public static void bfs(int v){
-        q.offer(v);
-        visited[v] = true;
+    // DFS(깊이 우선 탐색) 메서드
+    static void dfs(int node) {
+        // 현재 노드를 방문 처리
+        visited[node] = true;
 
-        while(!q.isEmpty()){
-            v = q.poll();
-            count++;
-            for (int i = 1; i <= computers; i++){
-                if (conenctions[v][i] == 1 && !visited[i]){
-                    q.offer(i);
-                    visited[i] = true;
-                }
+        // 모든 컴퓨터를 탐색
+        for (int i = 1; i <= N; i++) {
+            // 아직 방문하지 않았고, 현재 노드와 연결된 컴퓨터인 경우
+            if (!visited[i] && connections[node][i] == 1) {
+                // DFS를 통해 해당 노드를 탐색하고, 카운트 변수를 1 증가시킨다.
+                dfs(i);
+                count++;
             }
         }
     }
