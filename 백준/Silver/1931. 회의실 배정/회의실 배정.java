@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+// 다시 풀기
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,7 +35,6 @@ public class Main {
                 answer++;
                 endTime = meetings[i][1];
             }
-
         }
 
         System.out.println(answer);
