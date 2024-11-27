@@ -1,4 +1,3 @@
--- 코드를 작성해주세요
 SELECT
     ED.ID,
     COUNT(TEMP.ID) AS CHILD_COUNT 
@@ -9,8 +8,10 @@ LEFT JOIN
         SELECT ID, PARENT_ID
         FROM ECOLI_DATA
         WHERE PARENT_ID IS NOT NULL
-    )  AS TEMP
+    ) AS TEMP
 ON
     ED.ID = TEMP.PARENT_ID
 GROUP BY 
-    ED.ID;
+    ED.ID
+ORDER BY 
+    ED.ID ASC;
