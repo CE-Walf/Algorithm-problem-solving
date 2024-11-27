@@ -1,0 +1,8 @@
+SELECT
+    COUNT(*) AS COUNT
+FROM 
+    ECOLI_DATA
+WHERE
+    (GENOTYPE & 4 > 0 OR GENOTYPE & 1 > 0) AND
+    GENOTYPE & 2 = 0
+    
