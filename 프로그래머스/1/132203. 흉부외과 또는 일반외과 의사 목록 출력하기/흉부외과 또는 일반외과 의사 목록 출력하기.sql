@@ -1,4 +1,5 @@
 -- ORACLE은 TO_CHAR, MYSQL은 DATE_FORMAT 
+-- ORACLE은 별칭 사용시 as 키워드를 붙이면 오류가 발생하지만, MySQL같은 경우는 AS를 붙여도 되고 안붙여도 된다.
 
 SELECT DR_NAME, DR_ID, MCDP_CD, TO_CHAR(HIRE_YMD, 'YYYY-MM-DD') HIRE_YMD
 FROM DOCTOR
