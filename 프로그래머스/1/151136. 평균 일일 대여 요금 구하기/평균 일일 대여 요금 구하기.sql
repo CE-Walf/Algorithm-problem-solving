@@ -1,4 +1,6 @@
 -- ROUND, AVG 함수.
+-- GROUP BY를 넣어도, 안넣어도 똑같다. (이는 SQL의 논리적 실행순서를 생각하면 이해가 쉽다.)
+-- FROM > ON > WHERE > GROUP BY > HAVING > SELECT > DISTINCT > ORDER BY > LIMIT/FETCH
 
 SELECT ROUND(AVG(DAILY_FEE),0)
 FROM CAR_RENTAL_COMPANY_CAR
